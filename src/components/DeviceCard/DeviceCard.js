@@ -10,29 +10,30 @@ import {
   SvgIconDeviceIotLight,
   SvgIconGatewayLogoLight,
 } from '../../styles/icons';
+import strings from '../../strings';
 
 const getTheIcon = iconName => {
-  return iconName === 'VEHICLE_TRACKING' ? (
+  return iconName === strings.vehicleTrackingIconName ? (
     <SvgIconDeviceVehicleLight />
-  ) : iconName === 'FIRE' ? (
+  ) : iconName === strings.fireIconName ? (
     <SvgIconDeviceFireLight />
-  ) : iconName === 'CAMERA' ? (
+  ) : iconName === strings.cameraIconName ? (
     <SvgIconDeviceCameraLight />
-  ) : iconName === 'IVIDEON_BRIDGE' ? (
+  ) : iconName === strings.IvidionBridgeIconName ? (
     <SvgIconDeviceCameraLight />
-  ) : iconName === 'IP_CAMERA' ? (
+  ) : iconName === strings.ipCameraIconName ? (
     <SvgIconDeviceCameraLight />
-  ) : iconName === 'NVR' ? (
+  ) : iconName === strings.nvrIconName ? (
     <SvgIconDeviceCameraLight />
-  ) : iconName === 'ACCESS_CONTROL' ? (
+  ) : iconName === strings.accessControlIconName ? (
     <SvgIconDeviceAccessLight />
-  ) : iconName === 'PANEL' ? (
+  ) : iconName === strings.panelIconName ? (
     <SvgIconDeviceBurglaryLight />
-  ) : iconName === 'SMART_PANEL' ? (
+  ) : iconName === strings.smartPanelIconName ? (
     <SvgIconDeviceBurglaryLight />
-  ) : iconName === 'SMARTBOX_IO_MODULE' ? (
+  ) : iconName === strings.smartboxIoModuleIconName ? (
     <SvgIconDeviceIotLight />
-  ) : iconName === 'SMARTHUB' ? (
+  ) : iconName === strings.smartHubIconName ? (
     <SvgIconGatewayLogoLight />
   ) : (
     <SvgIconDeviceFireLight />

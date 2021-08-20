@@ -11,7 +11,7 @@ import {
 import strings from './strings';
 import colors from './styles/colors';
 import getDate from './utils/getDate';
-import AccountTitle from './components/Account/Title';
+import AccountTitle from './components/AccountTitle';
 import getAccounts from './utils/getAccounts';
 import PremiseCard from './components/PremiseCard';
 import DeviceCard from './components/DeviceCard';

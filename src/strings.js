@@ -27,4 +27,21 @@ export default {
   homeIconName: 'home',
   workPlaceIconName: 'work_place',
   depotIconName: 'depot',
+
+  vehicleTrackingIconName: 'VEHICLE_TRACKING',
+  fireIconName: 'FIRE',
+  cameraIconName: 'CAMERA',
+  IvidionBridgeIconName: 'IVIDEON_BRIDGE',
+  ipCameraIconName: 'IP_CAMERA',
+  nvrIconName: 'NVR',
+  accessControlIconName: 'ACCESS_CONTROL',
+  panelIconName: 'PANEL',
+  smartPanelIconName: 'SMART_PANEL',
+  smartboxIoModuleIconName: 'SMARTBOX_IO_MODULE',
+  smartHubIconName: 'SMARTHUB',
+
+  noDeviceTitle: 'CİHAZ YOK',
+  noDeviceExplanation: 'Eklenmiş cihazınız bulunmamaktadır',
+  newDeviceRequest: 'YENİ CİHAZ TALEBİ',
+  deviceRequests: 'CİHAZ TALEPLERİ',
 };
