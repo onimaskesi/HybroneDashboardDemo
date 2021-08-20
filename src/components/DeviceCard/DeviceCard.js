@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './DeviceCardStyle';
 import {
   SvgIconDeviceAccessLight,
@@ -40,14 +40,14 @@ const getTheIcon = iconName => {
   );
 };
 
-export default ({title, icon, serialNo}) => {
+export default ({title, icon, serialNo, onPress}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.iconContainer}>{getTheIcon(icon)}</View>
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.serialNo}>{serialNo}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
