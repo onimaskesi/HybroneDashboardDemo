@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './PremiseCardStyle';
-import {SvgXml} from 'react-native-svg';
 import {
   SvgIconHomeLight,
   SvgIconDepotLight,

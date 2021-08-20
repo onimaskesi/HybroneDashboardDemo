@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {
   FlatList,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -16,69 +15,91 @@ import getAccounts from './utils/getAccounts';
 import PremiseCard from './components/PremiseCard';
 import DeviceCard from './components/DeviceCard';
 import {SvgIconProfileLight} from './styles/icons';
+import NoDevice from './components/NoDevice/NoDevice';
 
-let currentAccountIndex = 0;
-let currentPremiseIndex = 0;
+let currentAccount;
+let currentPremise;
 
 const App = () => {
-  const accounts = getAccounts();
-  const premises = accounts[currentAccountIndex].premises[currentPremiseIndex];
-  const [accountTitlesComponents, setaccountTitlesComponents] = useState();
-  const [premisesComponents, setPremisesComponents] = useState();
+  const [accounts, setAccounts] = useState();
+  const [premises, setPremises] = useState();
+  const [devices, setDevices] = useState();
 
-  const updateAccount = () => {
-    setaccountTitlesComponents(getAccoutTitles());
+  const initAccountsAndCurrentAccount = () => {
+    const accounts = getAccounts();
+    setAccounts(accounts);
+    currentAccount = accounts[0];
+  };
+
+  const initPremisesAndCurrentPremise = () => {
+    const {premises} = currentAccount;
+    currentPremise = premises[0];
+  };
+
+  const getDatas = () => {
+    initAccountsAndCurrentAccount();
+
+    initPremisesAndCurrentPremise();
+
+    updatePremises();
+  };
+
+  useEffect(() => getDatas(), []);
+
+  const updateAccounts = () => {
+    setAccounts(accounts);
     updatePremises();
   };
 
   const updatePremises = () => {
-    setPremisesComponents(getPremises());
+    const {premises} = currentAccount;
+    setPremises(premises);
+
+    updateDevices();
   };
 
-  useEffect(() => {
-    updateAccount();
-  }, []);
+  const updateDevices = () => {
+    const {devices} = currentPremise;
+    setDevices(devices);
+  };
 
-  const accoundClickedHigherOrder = index => {
+  const accoundClickedHigherOrder = account => {
     return () => {
-      currentAccountIndex = index;
-      updateAccount();
+      currentAccount = account;
+      currentPremise = currentAccount.premises[0];
+      updateAccounts();
     };
   };
 
-  const getAccoutTitles = () => {
-    return accounts.map((account, index) => (
-      <AccountTitle
-        onPress={accoundClickedHigherOrder(index)}
-        accountName={account.name}
-        key={index}
-        isSelected={currentAccountIndex === index}
-      />
-    ));
-  };
+  const renderAccountTitles = ({item}) => (
+    <AccountTitle
+      onPress={accoundClickedHigherOrder(item)}
+      accountName={item.name}
+      isSelected={currentAccount === item}
+    />
+  );
 
-  const premiseClickedHigherOrder = index => {
+  const premiseClickedHigherOrder = premise => {
     return () => {
-      currentPremiseIndex = index;
+      currentPremise = premise;
       updatePremises();
     };
-  };
-
-  const getPremises = () => {
-    return accounts[currentAccountIndex].premises.map((premise, index) => (
-      <PremiseCard
-        key={index}
-        onPress={premiseClickedHigherOrder(index)}
-        title={premise.name}
-        icon={premise.type}
-        isSelected={currentPremiseIndex === index}
-      />
-    ));
   };
 
   const renderDevice = ({item}) => (
     <DeviceCard title={item.name} icon={item.type} serialNo={item.serialNo} />
   );
+
+  const renderPremises = ({item}) => (
+    <PremiseCard
+      onPress={premiseClickedHigherOrder(item)}
+      title={item.name}
+      icon={item.type}
+      isSelected={currentPremise === item}
+    />
+  );
+
+  const devicesTitle = `"${currentPremise?.name}" ${strings.connectedDevices}`;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -91,27 +112,30 @@ const App = () => {
           <SvgIconProfileLight />
         </TouchableOpacity>
       </View>
-      <View>
-        <ScrollView
-          style={styles.accountTitlesContainer}
+      <View style={styles.accountTitlesContainer}>
+        <FlatList
+          data={accounts}
+          renderItem={renderAccountTitles}
           horizontal
-          showsHorizontalScrollIndicator={false}>
-          {accountTitlesComponents}
-        </ScrollView>
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
-      <View>
-        <ScrollView
-          style={styles.PremiseContainer}
+      <View style={styles.premiseContainer}>
+        <FlatList
+          data={premises}
+          renderItem={renderPremises}
           horizontal
-          showsHorizontalScrollIndicator={false}>
-          {premisesComponents}
-        </ScrollView>
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
-      <Text
-        style={
-          styles.devicesTitle
-        }>{`"${premises.name}" ${strings.connectedDevices}`}</Text>
-      <FlatList data={premises.devices} renderItem={renderDevice} />
+      {devices?.length ? (
+        <>
+          <Text style={styles.devicesTitle}>{devicesTitle}</Text>
+          <FlatList data={devices} renderItem={renderDevice} />
+        </>
+      ) : (
+        <NoDevice />
+      )}
     </SafeAreaView>
   );
 };
@@ -144,9 +168,8 @@ const styles = StyleSheet.create({
   },
   accountTitlesContainer: {
     padding: 10,
-    marginRight: 10,
   },
-  PremiseContainer: {
+  premiseContainer: {
     padding: 10,
   },
   devicesTitle: {

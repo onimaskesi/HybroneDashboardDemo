@@ -27,7 +27,7 @@ const mounths = [
 
 const getDate = () => {
   const date = new Date();
-  const clock = `${date.getHours()}:${date.getMinutes()}`;
+  const clock = `${date.getHours()}:${('0' + date.getMinutes()).slice(-2)}`;
   const day = days[date.getDay()];
   const mounth = `${date.getDate()} ${mounths[date.getMonth()]}`;
 
