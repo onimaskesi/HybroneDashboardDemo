@@ -1,21 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import strings from './strings';
 import colors from './styles/colors';
-import getDate from './utils/getDate';
-import AccountTitle from './components/AccountTitle';
 import getAccounts from './utils/getAccounts';
-import PremiseCard from './components/PremiseCard';
 import DeviceCard from './components/DeviceCard';
-import {SvgIconProfileLight} from './styles/icons';
-import NoDevice from './components/NoDevice/NoDevice';
+import NoDevice from './components/NoDevice';
+import AccountTitles from './components/AccountTitleList';
+import Header from './components/Header';
+import Premises from './components/PremiseList';
 
 let currentAccount;
 let currentPremise;
@@ -46,11 +38,6 @@ const App = () => {
 
   useEffect(() => getDatas(), []);
 
-  const updateAccounts = () => {
-    setAccounts(accounts);
-    updatePremises();
-  };
-
   const updatePremises = () => {
     const {premises} = currentAccount;
     setPremises(premises);
@@ -67,16 +54,12 @@ const App = () => {
     return () => {
       currentAccount = account;
       currentPremise = currentAccount.premises[0];
-      updateAccounts();
+      updatePremises();
     };
   };
 
-  const renderAccountTitles = ({item}) => (
-    <AccountTitle
-      onPress={accoundClickedHigherOrder(item)}
-      accountName={item.name}
-      isSelected={currentAccount === item}
-    />
+  const renderDevice = ({item}) => (
+    <DeviceCard title={item.name} icon={item.type} serialNo={item.serialNo} />
   );
 
   const premiseClickedHigherOrder = premise => {
@@ -86,56 +69,42 @@ const App = () => {
     };
   };
 
-  const renderDevice = ({item}) => (
-    <DeviceCard title={item.name} icon={item.type} serialNo={item.serialNo} />
-  );
+  const devicesTitleText = `"${currentPremise?.name}" ${strings.connectedDevices}`;
 
-  const renderPremises = ({item}) => (
-    <PremiseCard
-      onPress={premiseClickedHigherOrder(item)}
-      title={item.name}
-      icon={item.type}
-      isSelected={currentPremise === item}
-    />
-  );
-
-  const devicesTitle = `"${currentPremise?.name}" ${strings.connectedDevices}`;
+  const DevicesTitle = () => {
+    return (
+      <Text style={styles.devicesTitle}>
+        {!!devices?.length && devicesTitleText}
+      </Text>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.welcomeContainer}>
-          <Text style={styles.welcome}>{strings.welcomeText}</Text>
-          <Text style={styles.date}>{getDate()}</Text>
-        </View>
-        <TouchableOpacity style={styles.iconContainer}>
-          <SvgIconProfileLight />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.accountTitlesContainer}>
+      <View style={styles.innerContainer}>
         <FlatList
-          data={accounts}
-          renderItem={renderAccountTitles}
-          horizontal
-          showsHorizontalScrollIndicator={false}
+          data={devices}
+          ListEmptyComponent={<NoDevice />}
+          ListHeaderComponent={
+            <>
+              <Header />
+              <AccountTitles
+                accounts={accounts}
+                onAccountSelected={accoundClickedHigherOrder}
+                currentAccount={currentAccount}
+              />
+              <Premises
+                premises={premises}
+                onPremiseSelected={premiseClickedHigherOrder}
+                currentPremise={currentPremise}
+              />
+              <DevicesTitle />
+            </>
+          }
+          renderItem={renderDevice}
+          showsVerticalScrollIndicator={false}
         />
       </View>
-      <View style={styles.premiseContainer}>
-        <FlatList
-          data={premises}
-          renderItem={renderPremises}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
-      {devices?.length ? (
-        <>
-          <Text style={styles.devicesTitle}>{devicesTitle}</Text>
-          <FlatList data={devices} renderItem={renderDevice} />
-        </>
-      ) : (
-        <NoDevice />
-      )}
     </SafeAreaView>
   );
 };
@@ -147,35 +116,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.backgroundColor,
   },
-  header: {
-    flexDirection: 'row',
-    padding: 20,
-    paddingTop: 50,
-  },
-  welcomeContainer: {
+  innerContainer: {
     flex: 1,
-  },
-  welcome: {
-    color: 'white',
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
-  date: {
-    color: colors.gray,
-  },
-  iconContainer: {
-    justifyContent: 'center',
-  },
-  accountTitlesContainer: {
-    padding: 10,
-  },
-  premiseContainer: {
-    padding: 10,
+    paddingHorizontal: 20,
   },
   devicesTitle: {
-    padding: 10,
-    paddingLeft: 25,
-    paddingBottom: 5,
-    color: colors.gray,
+    color: colors.lightGray,
+    fontFamily: 'Gilroy-Regular',
+    marginTop: 20,
   },
 });

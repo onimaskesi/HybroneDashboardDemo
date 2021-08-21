@@ -49,6 +49,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Gilroy-Regular.otf</string>
+		<string>Gilroy-Medium.otf</string>
+		<string>Gilroy-Bold.otf</string>
+		<string>Gilroy-Semibold.otf</string>
+		<string>Gilroy-Light.otf</string>
+		<string>Gilroy-Thin.otf</string>
+	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

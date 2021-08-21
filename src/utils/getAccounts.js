@@ -62,8 +62,12 @@ const getAccounts = () => {
 
   const account1 = new Account(0, 'Yeni Müşteri Test', premises1);
   const account2 = new Account(1, 'Hybronemusteri-10', premises2);
+  const account3 = new Account(2, 'Onimaskesi', premises1);
+  const account4 = new Account(3, 'Erdem', premises2);
+  const account5 = new Account(4, 'Onat', premises1);
+  const account6 = new Account(5, 'KIRAL', premises2);
 
-  return [account1, account2];
+  return [account1, account2, account3, account4, account5, account6];
 };
 
 export default getAccounts;

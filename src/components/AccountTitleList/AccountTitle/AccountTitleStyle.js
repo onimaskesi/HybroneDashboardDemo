@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
-import colors from '../../styles/colors';
+import colors from '../../../styles/colors';
 
 const baseStyle = StyleSheet.create({
   text: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    margin: 10,
+    fontSize: 30,
+    margin: 20,
+    marginLeft: 0,
+    fontFamily: 'Gilroy-Bold',
   },
 });
 

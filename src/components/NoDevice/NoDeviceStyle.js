@@ -3,14 +3,13 @@ import colors from '../../styles/colors';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   infoContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 20,
   },
   title: {
     color: 'white',
@@ -22,8 +21,8 @@ export default StyleSheet.create({
     color: colors.lightGray,
   },
   buttonContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 20,
   },
 });

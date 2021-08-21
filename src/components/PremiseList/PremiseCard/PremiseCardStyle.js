@@ -1,25 +1,14 @@
-import {StyleSheet} from 'react-native';
-import colors from '../../styles/colors';
-
-const baseStyle = StyleSheet.create({
-  container: {
-    borderRadius: 5,
-    margin: 10,
-    height: 100,
-    width: 100,
-    alignItems: 'flex-start',
-  },
-});
+import {Dimensions, StyleSheet} from 'react-native';
+//80
 
 export default StyleSheet.create({
-  ...baseStyle,
-  containerActive: {
-    ...baseStyle.container,
-    backgroundColor: colors.blue,
-  },
-  containerPassive: {
-    ...baseStyle.container,
-    backgroundColor: colors.lightGray,
+  container: {
+    borderRadius: 5,
+    marginRight: 20,
+    height: 100,
+    width: (Dimensions.get('window').width - 80) / 3,
+    alignItems: 'flex-start',
+    backgroundColor: '#ffffff20',
   },
   iconContainer: {
     flex: 1,
@@ -39,5 +28,6 @@ export default StyleSheet.create({
     color: 'white',
     textTransform: 'capitalize',
     textAlign: 'left',
+    fontFamily: 'Gilroy-Semibold',
   },
 });

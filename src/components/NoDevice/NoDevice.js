@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import Button from '../Button';
+import Button from './Button';
 import styles from './NoDeviceStyle';
 import {SvgIconEmptyLight} from '../../styles/icons';
 import strings from '../../strings';

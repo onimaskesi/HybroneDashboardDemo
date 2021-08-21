@@ -1,8 +1,8 @@
 export default {
   backgroundColor: '#2A3138',
-  gray: '#6D7276',
   lightGray: '#939799',
-  blue: '#23B6FB',
-  deviceIconContainerColor: '#74787C',
-  deviceSerialTextColor: '#7F8386',
+  blue: '#2C70D2',
+  lightBlue: '#21BAFD',
+  gray: '#74787C',
+  transparentWhite: '#ffffff20',
 };
