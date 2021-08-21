@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import strings from './strings';
 import colors from './styles/colors';
@@ -13,9 +13,9 @@ let currentAccount;
 let currentPremise;
 
 const App = () => {
-  const [accounts, setAccounts] = useState();
-  const [premises, setPremises] = useState();
-  const [devices, setDevices] = useState();
+  const [accounts, setAccounts] = useState([]);
+  const [premises, setPremises] = useState([]);
+  const [devices, setDevices] = useState([]);
 
   const initAccountsAndCurrentAccount = () => {
     const accounts = getAccounts();
@@ -79,6 +79,20 @@ const App = () => {
     );
   };
 
+  const accountTitlesRef = useRef();
+
+  useEffect(() => {
+    const scrollToSelectedAccountTitle = () => {
+      const index = accounts?.indexOf(currentAccount);
+      index !== -1 &&
+        accountTitlesRef.current?.scrollToIndex({
+          animated: true,
+          index: index,
+        });
+    };
+    scrollToSelectedAccountTitle();
+  }, [accounts, premises]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
@@ -89,6 +103,7 @@ const App = () => {
             <>
               <Header />
               <AccountTitles
+                referance={accountTitlesRef}
                 accounts={accounts}
                 onAccountSelected={accoundClickedHigherOrder}
                 currentAccount={currentAccount}

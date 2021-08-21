@@ -2,7 +2,12 @@ import React from 'react';
 import {View, FlatList} from 'react-native';
 import AccountTitle from './AccountTitle';
 
-const AccountTitles = ({accounts, onAccountSelected, currentAccount}) => {
+const AccountTitles = ({
+  accounts,
+  onAccountSelected,
+  currentAccount,
+  referance,
+}) => {
   const renderAccountTitles = ({item}) => (
     <AccountTitle
       onPress={onAccountSelected(item)}
@@ -15,6 +20,7 @@ const AccountTitles = ({accounts, onAccountSelected, currentAccount}) => {
     <View>
       {accounts && (
         <FlatList
+          ref={referance}
           data={accounts}
           renderItem={renderAccountTitles}
           horizontal

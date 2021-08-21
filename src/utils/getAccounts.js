@@ -60,12 +60,36 @@ const getAccounts = () => {
   premises2.push(new Premise(2, 'Ev', 'home', []));
   premises2.push(new Premise(3, 'Ev (Anadolu Yakası)', 'depot', []));
 
+  const premises3 = [];
+  premises3.push(new Premise(0, 'Evim', 'home', devices1));
+  premises3.push(new Premise(1, 'Şirket Depo', 'depot', devices2));
+  premises3.push(new Premise(2, 'Ofis', 'work_place', []));
+  premises3.push(new Premise(3, 'Evim', 'depot', []));
+
+  const premises4 = [];
+  premises4.push(new Premise(0, 'Ev2', 'work_place', []));
+  premises4.push(new Premise(1, 'Evim', 'home', []));
+  premises4.push(new Premise(2, 'Ev', 'home', []));
+  premises4.push(new Premise(3, 'Ev (Anadolu Yakası)', 'depot', []));
+
+  const premises5 = [];
+  premises5.push(new Premise(0, 'Evim', 'home', devices1));
+  premises5.push(new Premise(1, 'Şirket Depo', 'depot', devices2));
+  premises5.push(new Premise(2, 'Ofis', 'work_place', []));
+  premises5.push(new Premise(3, 'Evim', 'depot', []));
+
+  const premises6 = [];
+  premises6.push(new Premise(0, 'Ev2', 'work_place', []));
+  premises6.push(new Premise(1, 'Evim', 'home', []));
+  premises6.push(new Premise(2, 'Ev', 'home', []));
+  premises6.push(new Premise(3, 'Ev (Anadolu Yakası)', 'depot', []));
+
   const account1 = new Account(0, 'Yeni Müşteri Test', premises1);
   const account2 = new Account(1, 'Hybronemusteri-10', premises2);
-  const account3 = new Account(2, 'Onimaskesi', premises1);
-  const account4 = new Account(3, 'Erdem', premises2);
-  const account5 = new Account(4, 'Onat', premises1);
-  const account6 = new Account(5, 'KIRAL', premises2);
+  const account3 = new Account(2, 'Onimaskesi', premises3);
+  const account4 = new Account(3, 'Erdem', premises4);
+  const account5 = new Account(4, 'Onat', premises5);
+  const account6 = new Account(5, 'KIRAL', premises6);
 
   return [account1, account2, account3, account4, account5, account6];
 };
