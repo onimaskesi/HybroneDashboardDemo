@@ -88,6 +88,7 @@ const App = () => {
         accountTitlesRef.current?.scrollToIndex({
           animated: true,
           index: index,
+          //viewPosition: 0.5,
         });
     };
     scrollToSelectedAccountTitle();
@@ -118,6 +119,8 @@ const App = () => {
           }
           renderItem={renderDevice}
           showsVerticalScrollIndicator={false}
+          refreshing={!accounts}
+          onRefresh={() => getDatas()}
         />
       </View>
     </SafeAreaView>
